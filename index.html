@@ -205,15 +205,15 @@ conversation.appendChild(reponse);
   
   
     voix
-.filter(voixDisponible => ["fr-FR", "fr-BE"].includes(voixDisponible.lang))
+.filter(voixDisponible =>
+  ["fr-FR", "fr-BE"].includes(voixDisponible.lang)
+)
 .map((voixDisponible, index) => ({ voixDisponible, index }))
-    return priorite(a.voixDisponible) - priorite(b.voixDisponible);
-  })
   
 
         .forEach(({ voixDisponible, index }) => {
  const option = document.createElement("option");
-  option.value = index;
+  option.value = voix.indexOf(voixDisponible);
   option.textContent = voixDisponible.name + " (" + voixDisponible.lang + ")";
   menu.appendChild(option);
 });
