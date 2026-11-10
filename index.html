@@ -28,7 +28,8 @@ p { color:#806a48; }
     Envoyer ✨
   </button>
 <button type="button" onclick="ecouterLumea()">🔊 Écouter LUMÉA</button>
-
+<label for="photo">📷 Ajouter une photo</label>
+<input type="file" id="photo" accept="image/*">
 <label for="accessibilite">♿ Accessibilité visuelle :</label>
 <select id="accessibilite">
   <option value="normal">Affichage normal</option>
@@ -37,6 +38,13 @@ p { color:#806a48; }
   <option value="audio">🔊 Assistance vocale</option>
 </select></section>
 <script>
+  document.getElementById("accessibilite").addEventListener("change", function() {
+  if (this.value === "grand") {
+    document.body.style.fontSize = "24px";
+  } else {
+    document.body.style.fontSize = "";
+  }
+});
 function ecouterLumea() {
   const messages = document.querySelectorAll("#conversation p");
   const dernier = messages[messages.length - 1];
