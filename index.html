@@ -13,7 +13,57 @@ p { color:#806a48; }
 </style>
 </head>
 <body>
-<main>
+<main><section id="voyages-lumea" style="max-width:500px;margin:30px auto;padding:24px;background:#fffaf0;border:1px solid #d4af70;border-radius:20px;color:#a47c35;">
+  <h2>🌍 Voyages & Découvertes</h2>
+  <p>Explorez le monde avec LUMÉA IA 💛</p>
+
+  <label for="destinationVoyage">🌎 Pays ou ville</label>
+  <input id="destinationVoyage" type="text" placeholder="Ex. Belgique, Paris, Japon"
+    style="width:100%;box-sizing:border-box;padding:12px;margin:8px 0 16px;border:1px solid #d4af70;border-radius:10px;">
+
+  <label for="typeVoyage">✨ Que souhaitez-vous découvrir ?</label>
+  <select id="typeVoyage" style="width:100%;padding:12px;margin:8px 0 16px;border:1px solid #d4af70;border-radius:10px;">
+    <option value="séjours et vacances">🏖️ Séjours et vacances</option>
+    <option value="city trips">🏙️ City Trips</option>
+    <option value="billets d'avion">✈️ Billets d'avion</option>
+    <option value="hôtels">🏨 Hôtels</option>
+    <option value="excursions">🗺️ Excursions</option>
+    <option value="visites incontournables">🏛️ Visites incontournables</option>
+    <option value="gastronomie et restaurants">🍽️ Gastronomie et restaurants</option>
+  </select>
+
+  <button type="button" onclick="rechercherVoyageLumea()"
+    style="background:#b08d4f;color:white;border:0;padding:14px;border-radius:12px;width:100%;cursor:pointer;">
+    ✨ Découvrir ma destination
+  </button>
+
+  <div id="resultatVoyage" style="margin-top:18px;line-height:1.6;"></div>
+</section>
+
+<script>
+function rechercherVoyageLumea() {
+  const destination = document.getElementById("destinationVoyage").value.trim();
+  const type = document.getElementById("typeVoyage").value;
+  const resultat = document.getElementById("resultatVoyage");
+
+  if (!destination) {
+    resultat.textContent = "💛 Indiquez d'abord un pays ou une ville.";
+    return;
+  }
+
+  resultat.textContent = "✨ Découvrez les " + type + " à " + destination + ". Consultez les offres, tarifs et disponibilités auprès des prestataires.";
+
+  const recherche = encodeURIComponent(type + " " + destination + " prix");
+  const lien = document.createElement("a");
+  lien.href = "https://www.google.com/search?q=" + recherche;
+  lien.target = "_blank";
+  lien.rel = "noopener noreferrer";
+  lien.textContent = "🔎 Voir les résultats et tarifs";
+  lien.style.cssText = "display:block;margin-top:12px;color:#a47c35;font-weight:bold;";
+  resultat.appendChild(lien);
+}
+</script>
+
 <h1>✨ LUMÉA IA.</h1>
 <p>Votre intelligence artificielle douce et intuitive.</p>
 
