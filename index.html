@@ -46,15 +46,19 @@ const voixFeminine =
   voixDisponibles.find(v =>
     v.lang.toLowerCase().startsWith("fr") &&
     /hortense|denise|amelie|amélie|audrey|marie|siri/i.test(v.name)
-  ) ||
-  voixDisponibles.find(v =>
-    v.lang.toLowerCase().startsWith("fr")
   );
-  
+
+
 
 if (voixFeminine) {
   voix.voice = voixFeminine;
 }
+
+
+
+
+  
+
 
 voix.rate = 0.85;
 voix.pitch = 1.0;
