@@ -81,20 +81,13 @@ const voixFeminine = voixDisponibles.find(v =>
 if (voixFeminine) {
   voix.voice = voixFeminine;
 }
-<div id="editeurPhoto" style="margin-top:15px;">
-  <canvas id="photoCanvas" style="max-width:100%;border-radius:12px;"></canvas>
-
-  <p>☀️ Luminosité</p>
-  <input type="range" id="luminosite" min="50" max="150" value="100">
-
-  <p>🎨 Contraste</p>
-  <input type="range" id="contrastePhoto" min="50" max="150" value="100">
-
-  <button type="button" onclick="telechargerPhoto()">
-    💾 Enregistrer la photo
-  </button>
-</div>
-Vous avez envoyé
+voix.rate = 0.85;
+voix.pitch = 1.0;
+window.speechSynthesis.speak(voix);
+} else {
+  alert("La lecture vocale n'est pas disponible.");
+}
+}
 const photoInput = document.getElementById("photo");
 const photoCanvas = document.getElementById("photoCanvas");
 const contextePhoto = photoCanvas.getContext("2d");
@@ -118,7 +111,7 @@ photoInput.addEventListener("change", function() {
     photoCanvas.height = Math.round(image.height * taille);
 
     luminosite.value = 100;
-    contrastePhoto.value = 100;
+ contrastePhoto.value = 100;
 
     afficherPhoto();
     URL.revokeObjectURL(url);
@@ -130,8 +123,8 @@ photoInput.addEventListener("change", function() {
 function afficherPhoto() {
   if (!imageOriginale) return;
 
-  contextePhoto.filter =
-    brightness(${luminosite.value}%) contrast(${contrastePhoto.value}%);
+  
+contextePhoto.filter = `brightness(${luminosite.value}%) contrast(${contrastePhoto.value}%)`;
 
   contextePhoto.clearRect(0, 0, photoCanvas.width, photoCanvas.height);
   contextePhoto.drawImage(
@@ -139,7 +132,7 @@ function afficherPhoto() {
     0,
     0,
     photoCanvas.width,
-    photoCanvas.height
+    photoCanvas.heighty
   ); 
 
   contextePhoto.filter = "none";
@@ -165,15 +158,10 @@ function telechargerPhoto() {
   
 
 
-voix.rate = 0.85;
-voix.pitch = 1.0;
 
-window.speechSynthesis.speak(voix);
 
-  } else {
-    alert("La lecture vocale n'est pas disponible.");
-  }
-}
+
+
 function envoyer() {
   const champ = document.getElementById("message");
   const texte = champ.value.trim();
@@ -189,26 +177,19 @@ function envoyer() {
   reponse.textContent = "LUMÉA 💛 : " + (
     /bonjour|salut/i.test(texte) ? "Bonjour ! 💛 Comment allez-vous ?" :
     /comment vas|et vous|et toi|je vais bien|bien merci/i.test(texte) ? "Je vais très bien, merci ! 💛 Que souhaitez-vous faire aujourd'hui ?" :
-    /où es|ou es/i.test(texte) ? "Je suis une assistante virtuelle. 💛" :
-    /ton nom|tu t.appelles/i.test(texte) ? "Je m'appelle LUMÉA IA. ✨" :
-    /merci/i.test(texte) ? "Avec plaisir ! 💛" :
-    "Je suis LUMÉA 💛. Peux-tu préciser ta question ?"
-  );
-  conversation.appendChild(reponse);
+/où es|ou es/i.test(texte) ? "Je suis une assistante virtuelle. 💛" :
+/ton nom|tu t.appelles/i.test(texte) ? "Je m'appelle LUMÉA IA. ✨" :
+/merci/i.test(texte) ? "Avec plaisir ! 💛" :
+ 
+  "Je suis LUMÉA 💛. Peux-tu préciser ta question ?"
+);
+conversation.appendChild(reponse);
 }
-
-
-
-document.getElementById("accessibilite").addEventListener("change", function() {
-  if (this.value === "grand") {
-    document.body.style.fontSize = "24px";
-  } else {
-    document.body.style.fontSize = "";
-  }
-});
-
 </script>
+
+
+  
 <p>💛 Bienvenue dans votre nouvel univers.</p>
-<footer style="text-align:center;color:#a47c35;padding:25px;font-size:14px;">© 2026 LUMÉA IA — Tous droits réservés.</footer>
+<footer style="text-align:center;color:#a47c35;padding:25px;font-size:12px;">© 2026 LUMÉA IA — Tous droits réservés.</foote
 </body>
-</html>
+</
