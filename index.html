@@ -42,11 +42,11 @@ function ecouterLumea() {
 
 const voixDisponibles = window.speechSynthesis.getVoices();
 
-const voixFeminine =
-  voixDisponibles.find(v =>
-    v.lang.toLowerCase().startsWith("fr") &&
-    /hortense|denise|amelie|amélie|audrey|marie|siri/i.test(v.name)
-  );
+const voixFeminine = voixDisponibles.find(v =>
+  v.lang.toLowerCase().startsWith("fr") &&
+  /hortense|denise|amelie|amélie|audrey|marie|siri|female|femme/i.test(v.name)
+);
+
 
 
 
