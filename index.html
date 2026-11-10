@@ -39,7 +39,7 @@ function envoyer() {
   conversation.appendChild(p);
   champ.value = "";
   const reponse = document.createElement("p");
-reponse.textContent = "LUMÉA 💛 : Bonjour ! Je suis heureuse de discuter avec vous.";
+reponse.textContent = "LUMÉA 💛 : " + (/bonjour|salut/i.test(texte) ? "Bonjour ! 💛 Comment allez-vous ?" : /comment vas/i.test(texte) ? "Je vais très bien, merci ! 💛 Et vous ?" : /où es|ou es/i.test(texte) ? "Je suis une assistante virtuelle. 💛" : /ton nom|tu t'appelles/i.test(texte) ? "Je m'appelle LUMÉA IA. ✨" : "Je suis LUMÉA 💛. Peux-tu préciser ta question ?");
 conversation.appendChild(reponse);
 }
 </script>
