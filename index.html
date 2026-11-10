@@ -28,6 +28,11 @@ p { color:#806a48; }
     Envoyer ✨
   </button>
 <button type="button" onclick="ecouterLumea()">🔊 Écouter LUMÉA</button>
+
+<label for="choixVoix">🎙️ Choisir une voix :</label>
+<select id="choixVoix">
+  <option value="">Chargement des voix...</option>
+</select>
 <label for="photo">📷 Ajouter une photo</label>
 <input type="file" id="photo" accept="image/*">
 <div id="editeurPhoto" style="margin-top:15px;">
@@ -184,9 +189,41 @@ function envoyer() {
   "Je suis LUMÉA 💛. Peux-tu préciser ta question ?"
 );
 conversation.appendChild(reponse);
+
 }
-  
+function chargerVoix() {
+  const menu = document.getElementById("choixVoix");
+  if (!menu || !("speechSynthesis" in window)) return;
+
+  const voix = speechSynthesis.getVoices();
+  menu.innerHTML = "";
+
+  voix.forEach((voixDisponible, index) => {
+    const option = document.createElement("option");
+    option.value = index;
+    option.textContent = voixDisponible.name + " (" + voixDisponible.lang + ")";
+    menu.appendChild(option);
+  });
+}
+
+chargerVoix();
+speechSynthesis.onvoiceschanged = chargerVoix;
+
+function ecouterLumea() {
+  const voix = speechSynthesis.getVoices();
+  const choix = document.getElementById("choixVoix").value;
+  const texte = document.getElementById("conversation").innerText;
+  const message = new SpeechSynthesisUtterance(texte);
+
+  message.lang = "fr-FR";
+  if (voix[choix]) message.voice = voix[choix];
+
+  speechSynthesis.cancel();
+  speechSynthesis.speak(message);
+}
+
 </script>
+
 
 
   
