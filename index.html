@@ -38,10 +38,24 @@ function ecouterLumea() {
   if ("speechSynthesis" in window) {
     window.speechSynthesis.cancel();
     const voix = new SpeechSynthesisUtterance(texte);
-    voix.lang = "fr-FR";
-    voix.rate = 0.9;
-    voix.pitch = 1.1;
-    window.speechSynthesis.speak(voix);
+  voix.lang = "fr-FR";
+
+const voixDisponibles = window.speechSynthesis.getVoices();
+
+const voixFeminine = voixDisponibles.find(v =>
+  v.lang.toLowerCase().startsWith("fr") &&
+  /amelie|amélie|audrey|marie|siri/i.test(v.name)
+);
+
+if (voixFeminine) {
+  voix.voice = voixFeminine;
+}
+
+voix.rate = 0.85;
+voix.pitch = 1.0;
+
+window.speechSynthesis.speak(voix);
+
   } else {
     alert("La lecture vocale n'est pas disponible.");
   }
