@@ -202,19 +202,31 @@ conversation.appendChild(reponse);
   const voix = speechSynthesis.getVoices();
   menu.innerHTML = "";
 
-  voix.forEach((voixDisponible, index) => {
   
-  const option = document.createElement("option");
-    option.value = index;
-    option.textContent = voixDisponible.name + " (" + voixDisponible.lang + ")";
-    menu.appendChild(option);
-  });
-}
+  
+    voix
+  .map((voixDisponible, index) => ({ voixDisponible, index }))
+  .sort((a, b) => {
+    const priorite = v => {
+      const langue = v.lang.toLowerCase();
+      if (langue === "fr-fr") return 0;
+      if (langue === "fr-be") return 1;
+      return 2;
+    };
+    return priorite(a.voixDisponible) - priorite(b.voixDisponible);
+  })
+  
 
+        .forEach(({ voixDisponible, index }) => {
+ const option = document.createElement("option");
+  option.value = index;
+  option.textContent = voixDisponible.name + " (" + voixDisponible.lang + ")";
+  menu.appendChild(option);
+});
+}
 chargerVoix();
 speechSynthesis.onvoiceschanged = chargerVoix;
-
-function ecouterLumea() {
+  function ecouterLumea() {
   const voix = speechSynthesis.getVoices();
   const choix = document.getElementById("choixVoix").value;
   const texte = document.getElementById("conversation").innerText;
