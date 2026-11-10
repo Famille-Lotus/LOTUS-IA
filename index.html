@@ -191,7 +191,10 @@ function envoyer() {
 conversation.appendChild(reponse);
 
 }
+
 function chargerVoix() {
+
+
   const menu = document.getElementById("choixVoix");
   if (!menu || !("speechSynthesis" in window)) return;
 
@@ -199,6 +202,7 @@ function chargerVoix() {
   menu.innerHTML = "";
 
   voix.forEach((voixDisponible, index) => {
+  if (!["fr-BE", "fr-FR"].includes(voixDisponible.lang)) return;
     const option = document.createElement("option");
     option.value = index;
     option.textContent = voixDisponible.name + " (" + voixDisponible.lang + ")";
