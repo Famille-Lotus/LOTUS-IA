@@ -205,14 +205,8 @@ conversation.appendChild(reponse);
   
   
     voix
-  .map((voixDisponible, index) => ({ voixDisponible, index }))
-  .sort((a, b) => {
-    const priorite = v => {
-      const langue = v.lang.toLowerCase();
-      if (langue === "fr-fr") return 0;
-      if (langue === "fr-be") return 1;
-      return 2;
-    };
+.filter(voixDisponible => ["fr-FR", "fr-BE"].includes(voixDisponible.lang))
+.map((voixDisponible, index) => ({ voixDisponible, index }))
     return priorite(a.voixDisponible) - priorite(b.voixDisponible);
   })
   
