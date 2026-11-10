@@ -28,7 +28,14 @@ p { color:#806a48; }
     Envoyer ✨
   </button>
 <button type="button" onclick="ecouterLumea()">🔊 Écouter LUMÉA</button>
-</section>
+
+<label for="accessibilite">♿ Accessibilité visuelle :</label>
+<select id="accessibilite">
+  <option value="normal">Affichage normal</option>
+  <option value="grand">🔠 Texte agrandi</option>
+  <option value="contraste">◐ Contraste renforcé</option>
+  <option value="audio">🔊 Assistance vocale</option>
+</select></section>
 <script>
 function ecouterLumea() {
   const messages = document.querySelectorAll("#conversation p");
@@ -94,6 +101,13 @@ function envoyer() {
 
 
 
+document.getElementById("accessibilite").addEventListener("change", function() {
+  if (this.value === "grand") {
+    document.body.style.fontSize = "24px";
+  } else {
+    document.body.style.fontSize = "";
+  }
+});
 
 </script>
 <p>💛 Bienvenue dans votre nouvel univers.</p>
