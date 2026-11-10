@@ -30,6 +30,19 @@ p { color:#806a48; }
 <button type="button" onclick="ecouterLumea()">🔊 Écouter LUMÉA</button>
 <label for="photo">📷 Ajouter une photo</label>
 <input type="file" id="photo" accept="image/*">
+<div id="editeurPhoto" style="margin-top:15px;">
+  <canvas id="photoCanvas" style="max-width:100%;border-radius:12px;"></canvas>
+
+  <p>☀️ Luminosité</p>
+  <input type="range" id="luminosite" min="50" max="150" value="100">
+
+  <p>🎨 Contraste</p>
+  <input type="range" id="contrastePhoto" min="50" max="150" value="100">
+
+  <button type="button" onclick="telechargerPhoto()">
+    💾 Enregistrer la photo
+  </button>
+</div>
 <label for="accessibilite">♿ Accessibilité visuelle :</label>
 <select id="accessibilite">
   <option value="normal">Affichage normal</option>
@@ -68,7 +81,84 @@ const voixFeminine = voixDisponibles.find(v =>
 if (voixFeminine) {
   voix.voice = voixFeminine;
 }
+<div id="editeurPhoto" style="margin-top:15px;">
+  <canvas id="photoCanvas" style="max-width:100%;border-radius:12px;"></canvas>
 
+  <p>☀️ Luminosité</p>
+  <input type="range" id="luminosite" min="50" max="150" value="100">
+
+  <p>🎨 Contraste</p>
+  <input type="range" id="contrastePhoto" min="50" max="150" value="100">
+
+  <button type="button" onclick="telechargerPhoto()">
+    💾 Enregistrer la photo
+  </button>
+</div>
+Vous avez envoyé
+const photoInput = document.getElementById("photo");
+const photoCanvas = document.getElementById("photoCanvas");
+const contextePhoto = photoCanvas.getContext("2d");
+const luminosite = document.getElementById("luminosite");
+const contrastePhoto = document.getElementById("contrastePhoto");
+
+let imageOriginale = null;
+
+photoInput.addEventListener("change", function() {
+  const fichier = this.files[0];
+  if (!fichier) return;
+
+  const url = URL.createObjectURL(fichier);
+  const image = new Image();
+
+  image.onload = function() {
+    imageOriginale = image;
+
+    const taille = Math.min(1, 1600 / Math.max(image.width, image.height));
+    photoCanvas.width = Math.round(image.width * taille);
+    photoCanvas.height = Math.round(image.height * taille);
+
+    luminosite.value = 100;
+    contrastePhoto.value = 100;
+
+    afficherPhoto();
+    URL.revokeObjectURL(url);
+  };
+
+  image.src = url;
+});
+
+function afficherPhoto() {
+  if (!imageOriginale) return;
+
+  contextePhoto.filter =
+    brightness(${luminosite.value}%) contrast(${contrastePhoto.value}%);
+
+  contextePhoto.clearRect(0, 0, photoCanvas.width, photoCanvas.height);
+  contextePhoto.drawImage(
+    imageOriginale,
+    0,
+    0,
+    photoCanvas.width,
+    photoCanvas.height
+  ); 
+
+  contextePhoto.filter = "none";
+}
+
+luminosite.addEventListener("input", afficherPhoto);
+contrastePhoto.addEventListener("input", afficherPhoto);
+
+function telechargerPhoto() {
+  if (!imageOriginale) {
+    alert("Veuillez d'abord ajouter une photo.");
+    return;
+  }
+
+  const lien = document.createElement("a");
+  lien.download = "photo-lumea.png";
+  lien.href = photoCanvas.toDataURL("image/png");
+  lien.click();
+}
 
 
 
