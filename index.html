@@ -192,7 +192,8 @@ conversation.appendChild(reponse);
 
 }
 
-function chargerVoix() {
+  function chargerVoix() {
+  
 
 
   const menu = document.getElementById("choixVoix");
@@ -202,8 +203,8 @@ function chargerVoix() {
   menu.innerHTML = "";
 
   voix.forEach((voixDisponible, index) => {
-  if (!["fr-BE", "fr-FR"].includes(voixDisponible.lang)) return;
-    const option = document.createElement("option");
+  
+  const option = document.createElement("option");
     option.value = index;
     option.textContent = voixDisponible.name + " (" + voixDisponible.lang + ")";
     menu.appendChild(option);
