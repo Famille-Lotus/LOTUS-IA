@@ -27,21 +27,51 @@ p { color:#806a48; }
   <button onclick="envoyer()" style="margin-top:12px;padding:12px 24px;background:#b48b42;color:white;border:0;border-radius:12px;">
     Envoyer ✨
   </button>
+<button type="button" onclick="ecouterLumea()">🔊 Écouter LUMÉA</button>
 </section>
 <script>
+function ecouterLumea() {
+  const messages = document.querySelectorAll("#conversation p");
+  const dernier = messages[messages.length - 1];
+  const texte = dernier ? dernier.textContent : "Bonjour ! Je suis LUMÉA.";
+
+  if ("speechSynthesis" in window) {
+    window.speechSynthesis.cancel();
+    const voix = new SpeechSynthesisUtterance(texte);
+    voix.lang = "fr-FR";
+    voix.rate = 0.9;
+    voix.pitch = 1.1;
+    window.speechSynthesis.speak(voix);
+  } else {
+    alert("La lecture vocale n'est pas disponible.");
+  }
+}
 function envoyer() {
   const champ = document.getElementById("message");
   const texte = champ.value.trim();
   if (!texte) return;
+
   const conversation = document.getElementById("conversation");
   const p = document.createElement("p");
   p.textContent = "Vous : " + texte;
   conversation.appendChild(p);
   champ.value = "";
+
   const reponse = document.createElement("p");
-reponse.textContent = "LUMÉA 💛 : " + (/bonjour|salut/i.test(texte) ? "Bonjour ! 💛 Comment allez-vous ?" : /comment vas|et vous|et toi|je vais bien|bien merci/i.test(texte) ? "Je vais très bien, merci ! 💛 Que souhaitez-vous faire aujourd'hui ?" : /où es|ou es/i.test(texte) ? "Je suis une assistante virtuelle. 💛" : /ton nom|tu t'appelles/i.test(texte) ? "Je m'appelle LUMÉA IA. ✨" : /merci/i.test(texte) ? "Avec plaisir ! 💛" : "Je suis LUMÉA 💛. Peux-tu préciser ta question ?");
-conversation.appendChild(reponse);
+  reponse.textContent = "LUMÉA 💛 : " + (
+    /bonjour|salut/i.test(texte) ? "Bonjour ! 💛 Comment allez-vous ?" :
+    /comment vas|et vous|et toi|je vais bien|bien merci/i.test(texte) ? "Je vais très bien, merci ! 💛 Que souhaitez-vous faire aujourd'hui ?" :
+    /où es|ou es/i.test(texte) ? "Je suis une assistante virtuelle. 💛" :
+    /ton nom|tu t.appelles/i.test(texte) ? "Je m'appelle LUMÉA IA. ✨" :
+    /merci/i.test(texte) ? "Avec plaisir ! 💛" :
+    "Je suis LUMÉA 💛. Peux-tu préciser ta question ?"
+  );
+  conversation.appendChild(reponse);
 }
+
+
+
+
 </script>
 <p>💛 Bienvenue dans votre nouvel univers.</p>
 <footer style="text-align:center;color:#a47c35;padding:25px;font-size:14px;">© 2026 LUMÉA IA — Tous droits réservés.</footer>
