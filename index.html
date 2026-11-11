@@ -12,7 +12,98 @@ h1 { font-size:28px; }
 p { color:#806a48; }
 </style>
 </head>
-<body>
+<!-- LUMÉA IA : Services à proximité -->
+
+<section id="services-proximite">
+  <!-- Code complet de la rubrique -->
+</section>
+
+<script>
+  // Code JavaScript des services
+</script>
+
+</body>
+</html><button onclick="chercherService('pharmacie de garde')">
+    💊 Pharmacies de garde
+  </button>
+
+  <button onclick="chercherService('médecin de garde')">
+    🩺 Médecins de garde
+  </button>
+
+  <button onclick="chercherService('hôpital urgences')">
+    🏥 Hôpitaux
+  </button>
+
+  <button onclick="chercherService('supermarché')">
+    🛒 Supermarchés
+  </button>
+
+  <button onclick="chercherService('boulangerie')">
+    🥖 Boulangeries
+  </button>
+
+  <button onclick="chercherService('restaurant')">
+    🍽️ Restaurants
+  </button>
+
+  <button onclick="chercherService('distributeur billets')">
+    🏧 Distributeurs
+  </button>
+
+  <button onclick="chercherService('commissariat police')">
+    🚓 Police
+  </button>
+
+  <p id="serviceStatut" role="status"></p>
+</section>
+
+
+
+                                                                                                                      </body>
+
+function chercherService(type) {
+  const statut =
+    document.getElementById("serviceStatut");
+
+  if (!navigator.geolocation) {
+    statut.textContent =
+      "La localisation n'est pas disponible.";
+    return;
+  }
+
+  statut.textContent =
+    "Recherche de votre position...";
+
+  navigator.geolocation.getCurrentPosition(
+    function(position) {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      const recherche = encodeURIComponent(type);
+
+      const url =
+        "https://www.google.com/maps/search/" +
+        recherche + "/@" +
+        lat + "," + lon + ",14z";
+
+      statut.textContent =
+        "Ouverture des résultats à proximité...";
+
+      window.location.href = url;
+    },
+    function() {
+      statut.textContent =
+        "Localisation indisponible. " +
+        "Vérifiez les autorisations Safari.";
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 15000
+    }
+  );
+}
+
 
 <section id="musique" style="background:#fff9eb;color:#594522;padding:20px;border-radius:18px;text-align:center;margin:20px 0;">
 
