@@ -13,15 +13,123 @@ p { color:#806a48; }
 </style>
 </head>
 <body>
-<section id="musique" style="text-align:center;padding:20px;">
-  <h2>🎵 Reconnaissance musicale</h2>
-  <p>Découvrez vos chansons avec LUMÉA IA 💛</p>
-  <button type="button" onclick="window.open('https://music.apple.com/','_blank')">
-     <img src="IMG_2192.jpeg" alt="Apple Music" style="width:28px;height:28px;vertical-align:middle;border-radius:6px;">
-  <button type="button"
-  onclick="window.open('https://www.google.com/search?q=identifier+une+chanson+en+fredonnant','_blank')"
-  style="background:#b08d4f;color:white;border:0;padding:14px;border-radius:12px;margin-top:12px;">
-  🎤 Fredonner une chanson
+
+<section id="musique" style="background:#fff9eb;color:#594522;padding:20px;border-radius:18px;text-align:center;margin:20px 0;">
+
+<h2>🎵 LUMÉA IA — Musique</h2>
+<p>Reconnaissance musicale, paroles et clips 💛</p>
+
+<button type="button" onclick="lumeaEcouter()"
+style="background:#b08d4f;color:white;padding:15px;border:0;border-radius:12px;font-size:16px;">
+🎤 Identifier une musique
+</button>
+
+<p id="musiqueStatut" aria-live="polite"></p>
+
+<div id="musiqueResultat" style="display:none;">
+<h3>🎶 Résultat musical</h3>
+<p id="musiqueTitre"></p>
+<p id="musiqueArtiste"></p>
+<p id="musiqueAlbum"></p>
+
+<button type="button" onclick="lumeaParoles()">
+📝 Paroles
+</button>
+
+<button type="button" onclick="lumeaClip()">
+🎬 Clip officiel
+</button>
+
+<button type="button" onclick="lumeaApple()">
+🍎 Apple Music
+</button>
+</div>
+
+</section>
+
+<script>
+let lumeaChanson = null;
+
+async function lumeaEcouter() {
+  const statut = document.getElementById("musiqueStatut");
+
+  if (!navigator.mediaDevices?.getUserMedia ||
+      !window.MediaRecorder) {
+    statut.textContent =
+      "Enregistrement non disponible sur ce navigateur.";
+    return;
+  }
+
+  let flux;
+
+  try {
+    statut.textContent = "🎤 Autorisation du microphone...";
+
+    flux = await navigator.mediaDevices.getUserMedia({
+      audio: true
+    });
+
+    const morceaux = [];
+    const enregistreur = new MediaRecorder(flux);
+
+    enregistreur.ondataavailable = event => {
+      if (event.data.size) morceaux.push(event.data);
+    };
+
+    enregistreur.onerror = () => {
+      statut.textContent = "Erreur d'enregistrement.";
+      flux.getTracks().forEach(t => t.stop());
+    };
+
+    enregistreur.onstop = () => {
+      flux.getTracks().forEach(t => t.stop());
+
+      const audio = new Blob(morceaux, {
+        type: enregistreur.mimeType
+      });
+
+      statut.textContent =
+        "✅ Extrait de " +
+        Math.round(audio.size / 1024) +
+        " Ko enregistré. Le moteur de reconnaissance doit encore être connecté.";
+    };
+
+    enregistreur.start();
+    statut.textContent = "🎶 LUMÉA écoute pendant 8 secondes...";
+
+    setTimeout(() => {
+      if (enregistreur.state === "recording") {
+        enregistreur.stop();
+      }
+    }, 8000);
+
+  } catch (erreur) {
+    if (flux) flux.getTracks().forEach(t => t.stop());
+    statut.textContent =
+      "❌ Microphone refusé ou indisponible.";
+  }
+}
+
+function lumeaParoles() {
+  if (!lumeaChanson) return;
+  alert("Service de paroles à connecter.");
+}
+
+function lumeaClip() {
+  if (!lumeaChanson) return;
+  alert("Service de clips officiels à connecter.");
+}
+
+function lumeaApple() {
+  if (!lumeaChanson) return;
+  window.open(
+    "https://music.apple.com/",
+    "_blank",
+    "noopener,noreferrer"
+  );
+}
+</script>
+
 </button>
 
 
