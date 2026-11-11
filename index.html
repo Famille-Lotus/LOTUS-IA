@@ -10,52 +10,7 @@ body { margin:0; min-height:100vh; background:#fff8ec; color:#a67c2d; font-famil
 main { padding:80px 20px; }
 h1 { font-size:28px; }
 p { color:#806a48; }
-</style>
-</head>
-<!-- LUMÉA IA : Services à proximité -->
-
-<section id="services-proximite">
-  <!-- Code complet de la rubrique -->
-</section>
-
-<script>
-  // Code JavaScript des services
-</script>
-
-</body>
-</html><button onclick="chercherService('pharmacie de garde')">
-    💊 Pharmacies de garde
-  </button>
-
-  <button onclick="chercherService('médecin de garde')">
-    🩺 Médecins de garde
-  </button>
-
-  <button onclick="chercherService('hôpital urgences')">
-    🏥 Hôpitaux
-  </button>
-
-  <button onclick="chercherService('supermarché')">
-    🛒 Supermarchés
-  </button>
-
-  <button onclick="chercherService('boulangerie')">
-    🥖 Boulangeries
-  </button>
-
-  <button onclick="chercherService('restaurant')">
-    🍽️ Restaurants
-  </button>
-
-  <button onclick="chercherService('distributeur billets')">
-    🏧 Distributeurs
-  </button>
-
-  <button onclick="chercherService('commissariat police')">
-    🚓 Police
-  </button>
-
-  <p id="serviceStatut" role="status"></p>
+<
 
 
 
@@ -170,7 +125,6 @@ function lumeaClip() {
   if (!lumeaChanson) return;
   alert("Service de clips officiels à connecter.");
 }
-
 function lumeaApple() {
   if (!lumeaChanson) return;
   window.open(
@@ -178,7 +132,141 @@ function lumeaApple() {
     "_blank",
     "noopener,noreferrer"
   );
+}/style>
+</head>
+<!-- LUMÉA IA : Services à proximité -->
+
+<section id="services-proximite">
+  <!-- Code complet de la rubrique -->
+</section>
+
+<script>
+  // Code JavaScript des services
+</script>
+
+</body>
+</html><button onclick="chercherService('pharmacie de garde')">
+    💊 Pharmacies de garde
+  </button>
+
+  <button onclick="chercherService('médecin de garde')">
+    🩺 Médecins de garde
+  </button>
+
+  <button onclick="chercherService('hôpital urgences')">
+    🏥 Hôpitaux
+  </button>
+
+  <button onclick="chercherService('supermarché')">
+    🛒 Supermarchés
+  </button>
+
+  <button onclick="chercherService('boulangerie')">
+    🥖 Boulangeries
+  </button>
+
+  <button onclick="chercherService('restaurant')">
+    🍽️ Restaurants
+  </button>
+
+  <button onclick="chercherService('distributeur billets')">
+    🏧 Distributeurs
+  </button>
+
+  <button onclick="chercherService('commissariat police')">
+    🚓 Police
+  </button>
+
+  <p id="serviceStatut" role="status"></p>
+
+<section id="carte-mondiale" style="background:#fff9eb;color:#594522;padding:20px;border-radius:18px;margin:20px 0;text-align:center;">
+  <h2>🌍 LUMÉA IA — Carte mondiale</h2>
+  <p>Recherchez des services dans le monde entier 💛</p>
+
+  <input id="mapPays" placeholder="Pays"
+    style="padding:12px;margin:5px;border-radius:10px;max-width:90%;">
+  <input id="mapVille" placeholder="Ville ou commune"
+    style="padding:12px;margin:5px;border-radius:10px;max-width:90%;">
+
+  <select id="mapService" style="padding:12px;border-radius:10px;max-width:95%;">
+    <option value="pharmacie de garde">💊 Pharmacie de garde</option>
+    <option value="médecin de garde">👨‍⚕️ Médecin de garde</option>
+    <option value="hôpital">🏥 Hôpital</option>
+    <option value="police">🚓 Police</option>
+    <option value="supermarché">🛒 Magasin</option>
+    <option value="restaurant">🍽️ Restaurant</option>
+  </select>
+
+  <p>
+    <button onclick="lumeaCarteRecherche()" style="background:#b08d4f;color:white;border:0;padding:12px;border-radius:10px;">
+      🔎 Rechercher sur la carte
+    </button>
+    <button onclick="lumeaCarteGPS()" style="background:#80632e;color:white;border:0;padding:12px;border-radius:10px;">
+      📍 Autour de moi
+    </button>
+  </p>
+
+  <p id="mapStatut" aria-live="polite"></p>
+  <iframe id="mapFrame" title="Carte LUMÉA IA"
+    style="width:100%;height:350px;border:0;border-radius:12px;"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <p style="font-size:12px;">⚠️ Vérifiez les horaires de garde auprès des services officiels.</p>
+</section>
+
+<script>
+function lumeaCarteRecherche() {
+  const pays = document.getElementById("mapPays").value.trim();
+  const ville = document.getElementById("mapVille").value.trim();
+  const service = document.getElementById("mapService").value;
+
+  if (!pays && !ville) {
+    document.getElementById("mapStatut").textContent =
+      "Indiquez un pays ou une ville.";
+    return;
+  }
+
+  const recherche = [service, ville, pays].filter(Boolean).join(" ");
+  lumeaAfficherCarte(recherche);
 }
+
+function lumeaAfficherCarte(recherche) {
+  const url = "https://www.google.com/maps?q=" +
+    encodeURIComponent(recherche) + "&output=embed";
+
+  document.getElementById("mapFrame").src = url;
+  document.getElementById("mapStatut").textContent =
+    "🗺️ Carte chargée. Vérifiez les résultats.";
+}
+
+function lumeaCarteGPS() {
+  const statut = document.getElementById("mapStatut");
+
+  if (!navigator.geolocation) {
+    statut.textContent = "Géolocalisation indisponible.";
+    return;
+  }
+
+  statut.textContent = "📍 Localisation en cours...";
+
+  navigator.geolocation.getCurrentPosition(
+    position => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      const service = document.getElementById("mapService").value;
+
+      lumeaAfficherCarte(service + " près de " + lat + "," + lon);
+    },
+    () => {
+      statut.textContent = "Position indisponible. Indiquez une ville.";
+    },
+    { enableHighAccuracy: true, timeout: 15000 }
+  );
+}
+</script>
+
+
+
 </script>
 
 </button>
