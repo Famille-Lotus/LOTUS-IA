@@ -410,49 +410,6 @@ speechSynthesis.onvoiceschanged = chargerVoix;
   
 <p>💛 Bienvenue dans votre nouvel univers.</p>
 <footer style="text-align:center;color:#a47c35;padding:25px;font-size:12px;">© 2026 LUMÉA IA — Tous droits réservés.</foote
-</body>
-
-function chercherService(type) {
-  const statut =
-    document.getElementById("serviceStatut");
-
-  if (!navigator.geolocation) {
-    statut.textContent =
-      "La localisation n'est pas disponible.";
-    return;
-  }
-
-  statut.textContent =
-    "Recherche de votre position...";
-
-  navigator.geolocation.getCurrentPosition(
-    function(position) {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
-
-      const recherche = encodeURIComponent(type);
-
-      const url =
-        "https://www.google.com/maps/search/" +
-        recherche + "/@" +
-        lat + "," + lon + ",14z";
-
-      statut.textContent =
-        "Ouverture des résultats à proximité...";
-
-      window.location.href = url;
-    },
-    function() {
-      statut.textContent =
-        "Localisation indisponible. " +
-        "Vérifiez les autorisations Safari.";
-    },
-    {
-      enableHighAccuracy: true,
-      timeout: 15000
-    }
-  );
-}
 <section class="carte">
   <h2>📍 Services à proximité</h2>
   <p>
@@ -496,3 +453,47 @@ function chercherService(type) {
 </section>
 
 
+
+                                                                                                                      </body>
+
+function chercherService(type) {
+  const statut =
+    document.getElementById("serviceStatut");
+
+  if (!navigator.geolocation) {
+    statut.textContent =
+      "La localisation n'est pas disponible.";
+    return;
+  }
+
+  statut.textContent =
+    "Recherche de votre position...";
+
+  navigator.geolocation.getCurrentPosition(
+    function(position) {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      const recherche = encodeURIComponent(type);
+
+      const url =
+        "https://www.google.com/maps/search/" +
+        recherche + "/@" +
+        lat + "," + lon + ",14z";
+
+      statut.textContent =
+        "Ouverture des résultats à proximité...";
+
+      window.location.href = url;
+    },
+    function() {
+      statut.textContent =
+        "Localisation indisponible. " +
+        "Vérifiez les autorisations Safari.";
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 15000
+    }
+  );
+}
