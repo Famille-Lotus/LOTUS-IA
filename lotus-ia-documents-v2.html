@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#fff8e7"><title>LOTUS IA — Au service de tous</title>
+<style>
+:root{--cream:#fff8e7;--gold:#b58a37;--brown:#574222;--white:#fffdf8}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Arial,sans-serif;background:linear-gradient(145deg,#fff8e7,#fffdf7);color:var(--brown)}header{padding:20px;text-align:center;background:#fff9ed;border-bottom:1px solid #e6d4ad}main{max-width:950px;margin:auto;padding:24px 18px 70px}.brand{display:flex;flex-direction:column;align-items:center;gap:4px}.lotus{width:155px;height:135px;filter:drop-shadow(0 4px 9px #b58a3733)}h1{font-family:Georgia,serif;color:#946b24;letter-spacing:.08em;font-size:clamp(2.2rem,7vw,3.5rem);margin:0}h2{font-family:Georgia,serif;color:#806025}p{line-height:1.65}.tagline{font-size:1.06rem;margin:10px auto;max-width:700px}.mission{font-weight:600;color:#775622}.intro{text-align:center;margin:18px auto 34px}.panel{border:1px solid #e4c98d;border-radius:22px;background:var(--white);padding:24px;box-shadow:0 7px 24px #8d6c2610;margin-bottom:22px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:13px}.tile{border:1px solid #dfc28c;background:#fff9ee;border-radius:15px;padding:19px 13px;text-align:left;color:var(--brown);font:inherit;cursor:pointer;min-height:108px}.tile:hover,.tile:focus-visible{outline:3px solid #b58a3766;background:#fff1d6}.tile strong{display:block;font-size:1.07rem;margin-bottom:6px}.tile span{font-size:.91rem}.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;margin-top:15px}button.action,select{border:1px solid #a77e31;border-radius:12px;padding:12px 16px;font:inherit}button.action{background:#a77e31;color:white;cursor:pointer}select{background:white;color:#48361c}#detail{margin-top:18px;padding:18px;border-radius:14px;background:#fff4dc;border:1px solid #e1c38b}#detail[hidden]{display:none}a{color:#72501a}footer{text-align:center;padding:20px;color:#775d34}.large{font-size:120%}.contrast{--cream:#fff;--gold:#6b4700;--brown:#191919;--white:#fff;background:#fff;color:#111}.contrast .panel,.contrast .tile{border:2px solid #111;background:#fff;color:#111}.contrast button.action{background:#111;color:#fff}small{display:block;color:#756344;margin-top:9px}
+#scanner[hidden]{display:none}#scanPreview img{max-width:100%;max-height:480px;object-fit:contain;border:1px solid #e4c98d;border-radius:10px}#scanPreview iframe{width:100%;height:480px;border:1px solid #e4c98d;border-radius:10px}#scanPreview article{padding:12px;border:1px solid #e4c98d;border-radius:12px;overflow-wrap:anywhere}button:disabled{opacity:.55;cursor:not-allowed}
+</style>
+</head>
+<body>
+<header><div class="brand"><svg class="lotus" viewBox="0 0 200 155" role="img" aria-label="Fleur de lotus dorée portée par des mains solidaires"><defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#9e6f20"/><stop offset=".5" stop-color="#f5d991"/><stop offset="1" stop-color="#a87521"/></linearGradient></defs><g fill="url(#g)" stroke="#9d702b" stroke-width="1.5"><path d="M100 108Q60 58 100 10Q140 58 100 108Z"/><path d="M99 112Q40 89 48 35Q95 54 99 112Z"/><path d="M101 112Q160 89 152 35Q105 54 101 112Z"/><path d="M99 117Q28 116 18 69Q75 64 99 117Z"/><path d="M101 117Q172 116 182 69Q125 64 101 117Z"/></g><path d="M9 117Q46 139 92 130M191 117Q154 139 108 130" stroke="#8d6326" stroke-width="10" fill="none" stroke-linecap="round"/><path d="M40 142Q100 160 160 142" stroke="#b58a37" stroke-width="6" fill="none" stroke-linecap="round"/></svg><h1>LOTUS IA</h1></div><p class="tagline">Votre intelligence artificielle douce et intuitive.</p><p class="mission">🌍 Une intelligence au service de tous, un monde à portée de main.</p></header>
+<main>
+<section class="intro"><h2>Bienvenue dans votre espace 🌸</h2><p>Un accompagnement simple et chaleureux pour les enfants, les adolescents, les adultes, les seniors et les personnes ayant des besoins particuliers.</p><div class="controls"><label for="profil">Adapter l'accueil :</label><select id="profil"><option value="tous">Pour tout le monde</option><option value="enfants">Enfants</option><option value="ados">Adolescents</option><option value="adultes">Adultes</option><option value="seniors">Seniors</option></select><button class="action" id="agrandir" type="button">Agrandir le texte</button><button class="action" id="contraste" type="button">Contraste renforcé</button></div></section>
+<section class="panel"><h2>Comment LOTUS IA peut vous aider ?</h2><div class="grid" id="rubriques">
+<button class="tile" type="button" data-title="💬 Accompagnement" data-desc="Un espace d'écoute, d'orientation et d'aide au quotidien. Les réponses automatiques nécessiteront une connexion à un service IA."><strong>💬 Accompagnement</strong><span>Écouter, guider, expliquer</span></button>
+<button class="tile" type="button" data-title="👨‍👩‍👧‍👦 Famille" data-desc="Agenda familial, organisation, école et activités pour les proches."><strong>👨‍👩‍👧‍👦 Famille</strong><span>Organiser la vie ensemble</span></button>
+<button class="tile" type="button" data-title="📄 LOTUS Scan" data-desc="Importer un PDF ou des photos et les consulter directement." id="openScan"><strong>📄 LOTUS Scan</strong><span>Documents et PDF</span></button>
+<button class="tile" type="button" data-title="🌍 Voyages" data-desc="Préparer des séjours, city trips, excursions et budgets. Les tarifs réels demanderont des services partenaires."><strong>🌍 Voyages</strong><span>Explorer le monde</span></button>
+<button class="tile" type="button" data-title="🏡 Maison" data-desc="Projets, tâches, organisation du logement et idées pratiques."><strong>🏡 Maison</strong><span>Faciliter le quotidien</span></button>
+<button class="tile" type="button" data-title="🎵 LOTUS Musique" data-desc="Découverte musicale et identification de chansons : reconnaissance à connecter à un service spécialisé."><strong>🎵 LOTUS Musique</strong><span>Découvrir et écouter</span></button>
+<button class="tile" type="button" data-title="🌐 LOTUS Traduction" data-desc="Aide à la traduction de textes et documents. Traduction automatique à connecter."><strong>🌐 LOTUS Traduction</strong><span>Communiquer sans frontières</span></button>
+<button class="tile" type="button" id="openDocuments" data-title="✍️ LOTUS Documents" data-desc="Créer des CV, lettres de motivation et procurations."><strong>✍️ LOTUS Documents</strong><span>CV, lettres et procurations</span></button>
+<button class="tile" type="button" data-title="🏃 LOTUS Sport" data-desc="Bouger à son rythme : marche, étirements, activités physiques douces et idées d’exercices pour différents âges. Des programmes guidés seront développés ultérieurement."><strong>🏃 LOTUS Sport</strong><span>Bouger et prendre soin de soi</span></button>
+<button class="tile" type="button" data-title="🪷 LOTUS Zen" data-desc="Un instant de douceur, rien que pour vous : respiration, méditation, détente, sommeil et relaxation. Les séances audio guidées seront développées progressivement."><strong>🪷 LOTUS Zen</strong><span>Un instant de douceur, rien que pour vous</span></button>
+<button class="tile" type="button" data-title="♿ Accessibilité" data-desc="Affichage adapté, textes lisibles et navigation simple pour différents besoins."><strong>♿ Accessibilité</strong><span>Une application pour tous</span></button>
+</div><div id="detail" hidden tabindex="-1" role="status"><h3 id="detailTitre"></h3><p id="detailTexte"></p><small>Présentation du module : les fonctions avancées ne sont pas encore reliées à l'application.</small></div></section>
+
+<section class="panel" id="scanner" hidden aria-label="LOTUS Scan">
+<h2>📄 LOTUS Scan — Documents et PDF</h2>
+<p>Importez un PDF ou des photos de documents depuis votre iPhone ou votre ordinateur. Vos fichiers restent sur votre appareil : cette page ne les envoie pas à un serveur.</p>
+<div class="controls" style="justify-content:flex-start">
+<label class="action" for="scanFiles" style="display:inline-block;background:#a77e31;color:white;border-radius:12px;padding:12px 16px;cursor:pointer">📁 Choisir des documents</label>
+<input id="scanFiles" type="file" accept="application/pdf,image/*,.pdf" multiple style="position:absolute;width:1px;height:1px;opacity:0" />
+<button class="action" id="cameraScan" type="button">📷 Prendre une photo</button>
+<input id="scanCamera" type="file" accept="image/*" capture="environment" style="position:absolute;width:1px;height:1px;opacity:0" />
+<button class="action" id="printScan" type="button" disabled>🖨️ Créer un PDF avec les photos</button>
+</div>
+<button class="action" id="clearScan" type="button">🗑️ Effacer les documents importés</button>
+<p id="scanStatus" role="status">Aucun document sélectionné.</p>
+<div id="scanPreview" style="display:grid;gap:14px"></div>
+<small>Pour un PDF déjà existant, utilisez « Choisir des documents » pour le consulter. Pour créer un PDF à partir de photos, utilisez « Créer un PDF avec les photos », puis choisissez « Enregistrer dans Fichiers » dans le menu d'impression de votre appareil. Cette version ne fusionne pas les PDF existants et n'effectue pas de reconnaissance de texte.</small>
+</section>
+
+<section class="panel" id="documents" hidden aria-label="LOTUS Documents">
+<h2>✍️ LOTUS Documents</h2><p>Rédigez un premier brouillon que vous pourrez corriger, copier et enregistrer en PDF avec la fonction d’impression.</p>
+<div class="controls" style="justify-content:flex-start"><label for="docType">Type de document</label><select id="docType"><option value="cv">CV</option><option value="motivation">Lettre de motivation</option><option value="procuration">Procuration</option></select></div>
+<div style="display:grid;gap:10px;margin:14px 0"><label>Nom complet <input id="docName" placeholder="Prénom et nom" style="display:block;width:100%;padding:12px"></label><label>Coordonnées (facultatif) <input id="docContact" placeholder="Email, téléphone, ville" style="display:block;width:100%;padding:12px"></label><label>Informations à inclure <textarea id="docInfo" rows="5" placeholder="Pour un CV : expériences, formations, compétences. Pour une lettre : poste, entreprise et motivations. Pour une procuration : personne autorisée, démarche et durée." style="display:block;width:100%;padding:12px;font:inherit"></textarea></label></div>
+<fieldset id="cvFields" style="border:1px solid #d5b46c;border-radius:12px;padding:14px;margin:12px 0"><legend><strong>✨ Créateur de CV</strong></legend>
+<div style="display:grid;gap:10px">
+<label>Modèle de CV <select id="cvStyle" style="display:block;width:100%;padding:10px"><option value="classique">Classique</option><option value="moderne">Moderne</option><option value="simple">Simple</option></select></label>
+<label>Intitulé du poste recherché <input id="cvJob" placeholder="Ex. Assistant administratif" style="display:block;width:100%;padding:10px"></label>
+<label>Présentation professionnelle <textarea id="cvProfile" rows="3" placeholder="Quelques phrases sur votre parcours et vos objectifs" style="display:block;width:100%;padding:10px;font:inherit"></textarea></label>
+<label>Expériences professionnelles <textarea id="cvExperience" rows="4" placeholder="Poste, employeur, dates et missions" style="display:block;width:100%;padding:10px;font:inherit"></textarea></label>
+<label>Formations et diplômes <textarea id="cvEducation" rows="3" placeholder="Diplôme, établissement, année" style="display:block;width:100%;padding:10px;font:inherit"></textarea></label>
+<label>Compétences <textarea id="cvSkills" rows="3" placeholder="Informatique, organisation, communication…" style="display:block;width:100%;padding:10px;font:inherit"></textarea></label>
+<label>Langues <input id="cvLanguages" placeholder="Ex. Français, néerlandais, anglais" style="display:block;width:100%;padding:10px"></label>
+</div></fieldset>
+<fieldset id="letterFields" hidden style="border:1px solid #d5b46c;border-radius:12px;padding:14px;margin:12px 0"><legend><strong>💼 Lettre de motivation</strong></legend><div style="display:grid;gap:10px"><label>Poste visé <input id="letterJob" placeholder="Ex. Assistant administratif" style="display:block;width:100%;padding:10px"></label><label>Entreprise ou organisme <input id="letterCompany" placeholder="Nom de l'entreprise" style="display:block;width:100%;padding:10px"></label><label>Ville <input id="letterCity" placeholder="Ex. Bruxelles" style="display:block;width:100%;padding:10px"></label></div></fieldset>
+<fieldset id="proxyFields" hidden style="border:1px solid #d5b46c;border-radius:12px;padding:14px;margin:12px 0"><legend><strong>🖊️ Procuration</strong></legend><div style="display:grid;gap:10px"><label>Personne autorisée (mandataire) <input id="proxyName" placeholder="Nom complet" style="display:block;width:100%;padding:10px"></label><label>Démarche autorisée <textarea id="proxyTask" rows="3" placeholder="Décrire la démarche précisément" style="display:block;width:100%;padding:10px;font:inherit"></textarea></label><label>Début de validité <input type="date" id="proxyStart" style="display:block;width:100%;padding:10px"></label><label>Fin de validité <input type="date" id="proxyEnd" style="display:block;width:100%;padding:10px"></label><label>Lieu de signature <input id="proxyCity" placeholder="Ex. Anvers" style="display:block;width:100%;padding:10px"></label></div></fieldset>
+<button class="action" id="makeDoc" type="button">Créer le brouillon</button>
+<div id="docResult" hidden style="margin-top:15px"><label for="docOutput"><strong>Document modifiable</strong></label><textarea id="docOutput" rows="14" style="width:100%;padding:12px;font:inherit"></textarea><div class="controls"><button class="action" type="button" id="copyDoc">Copier le texte</button><button class="action" type="button" id="printDoc">Imprimer / PDF</button><button class="action" type="button" id="saveDoc">Télécharger le texte</button></div></div>
+<small>Les modèles sont des brouillons : relisez-les. Certaines procurations exigent un formulaire officiel, une pièce d’identité ou des formalités spécifiques.</small>
+</section>
+<section class="panel" id="musicPanel" hidden><h2>🎵 LOTUS Musique</h2><p>Un espace pour vos découvertes musicales et vos idées de chansons.</p><label>Ma playlist personnelle <textarea id="playlist" rows="5" placeholder="Notez ici les titres et artistes que vous aimez…" style="display:block;width:100%;padding:12px;font:inherit"></textarea></label><button class="action" id="savePlaylist" type="button">Enregistrer sur cet appareil</button><p id="musicStatus" role="status"></p><small>L'écoute et la reconnaissance musicale nécessitent une intégration ultérieure avec un service autorisé.</small></section>
+<section class="panel" id="zenPanel" hidden><h2>🪷 LOTUS Zen</h2><p>Un exercice simple : inspirez doucement pendant 4 secondes, puis expirez pendant 6 secondes. Recommencez à votre rythme, sans forcer.</p><button class="action" id="zenButton" type="button">Afficher mon moment de calme</button><p id="zenMessage" role="status"></p></section>
+<section class="panel"><h2>🤝 Ensemble, partout dans le monde</h2><p>La fleur de lotus représente la sérénité et le renouveau. Les mains qui la soutiennent symbolisent l'entraide, la diversité et la solidarité entre les personnes.</p><p><strong>LOTUS IA est pensée pour accompagner chacun, sans exclusion.</strong></p></section>
+</main><footer>© 2026 LOTUS IA — Scan et Documents · version de vérification 🌸</footer>
+<script>
+const profil=document.getElementById('profil');profil.addEventListener('change',()=>{const titres={tous:'Bienvenue dans votre espace 🌸',enfants:'Bienvenue dans LOTUS Kids 🌈',ados:'Bienvenue dans LOTUS Teens ✨',adultes:'Bienvenue dans LOTUS Adultes 🌿',seniors:'Bienvenue dans LOTUS Seniors 💛'};document.querySelector('.intro h2').textContent=titres[profil.value];});
+document.getElementById('agrandir').addEventListener('click',()=>{document.body.classList.toggle('large');document.getElementById('agrandir').textContent=document.body.classList.contains('large')?'Taille normale':'Agrandir le texte';});
+document.getElementById('contraste').addEventListener('click',()=>{document.body.classList.toggle('contrast');document.getElementById('contraste').textContent=document.body.classList.contains('contrast')?'Contraste normal':'Contraste renforcé';});
+const scanSection=document.getElementById('scanner');
+const fileInput=document.getElementById('scanFiles');
+const cameraInput=document.getElementById('scanCamera');
+const preview=document.getElementById('scanPreview');
+const status=document.getElementById('scanStatus');
+let activeUrls=[];let scanImages=[];
+document.getElementById('clearScan').addEventListener('click',()=>{
+  activeUrls.forEach(url=>URL.revokeObjectURL(url));activeUrls=[];scanImages=[];
+  preview.replaceChildren();fileInput.value='';cameraInput.value='';
+  document.getElementById('printScan').disabled=true;
+  status.textContent='Documents effacés de cette page.';
+});
+function showScanner(){scanSection.hidden=false;scanSection.scrollIntoView({behavior:'smooth',block:'start'});}
+document.getElementById('openScan').addEventListener('click',showScanner);
+document.getElementById('cameraScan').addEventListener('click',()=>cameraInput.click());
+function addFiles(files){
+  const valid=Array.from(files).filter(f=>f.type==='application/pdf'||f.type.startsWith('image/')||/\.pdf$/i.test(f.name));
+  if(!valid.length){status.textContent='Veuillez choisir une image ou un fichier PDF.';return;}
+  for(const file of valid){
+    const url=URL.createObjectURL(file);activeUrls.push(url);
+    const article=document.createElement('article');
+    const name=document.createElement('strong');name.textContent=file.name;article.append(name);
+    const line=document.createElement('p');
+    const link=document.createElement('a');link.href=url;link.target='_blank';link.rel='noopener';link.textContent='Ouvrir le document';line.append(link);article.append(line);
+    if(file.type.startsWith('image/')){
+      const img=document.createElement('img');img.src=url;img.addEventListener('error',()=>{status.textContent='Image illisible : essayez une photo JPEG ou PNG.';});img.alt='Aperçu de '+file.name;article.append(img);scanImages.push(url);
+    }else{
+      const iframe=document.createElement('iframe');iframe.src=url;iframe.title='Aperçu PDF : '+file.name;article.append(iframe);
+    }
+    preview.append(article);
+  }
+  status.textContent=preview.children.length+' document(s) importé(s). '+(scanImages.length ? 'Le bouton Créer un PDF avec les photos est disponible.' : 'Pour créer un nouveau PDF, ajoutez au moins une photo : les PDF importés peuvent être ouverts, mais pas fusionnés ici.');
+  document.getElementById('printScan').disabled=scanImages.length===0;
+  showScanner();
+}
+fileInput.addEventListener('change',e=>{addFiles(e.target.files);e.target.value='';});
+cameraInput.addEventListener('change',e=>{addFiles(e.target.files);e.target.value='';});
+document.getElementById('printScan').addEventListener('click',()=>{
+  if(!scanImages.length)return;
+  const w=window.open('','_blank');
+  if(!w){status.textContent='Autorisez les fenêtres surgissantes pour créer le PDF.';return;}
+  w.document.write('<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>LOTUS Scan — PDF</title><style>@page{margin:10mm}body{margin:0}img{display:block;max-width:100%;max-height:95vh;object-fit:contain;margin:auto;break-after:page}img:last-child{break-after:auto}nav{padding:16px;font:16px Arial;background:#fff8e7}button{padding:12px;font:inherit}@media print{nav{display:none}}</style></head><body></body></html>');
+  scanImages.forEach(src=>{const img=w.document.createElement('img');img.src=src;w.document.body.append(img);});
+  const nav=w.document.createElement('nav');
+  const note=w.document.createElement('p');note.textContent='Attendez la fin du chargement des photos, puis imprimez pour enregistrer le PDF.';
+  const button=w.document.createElement('button');button.textContent='Imprimer / Enregistrer en PDF';button.disabled=true;
+  button.addEventListener('click',()=>{w.focus();w.print();});nav.append(note,button);w.document.body.prepend(nav);
+  Promise.all(Array.from(w.document.images).map(img=>img.decode())).then(()=>{button.disabled=false;note.textContent='Photos prêtes. Sur iPhone : ouvrez le partage de l’aperçu d’impression, puis Enregistrer dans Fichiers.';}).catch(()=>{note.textContent='Une photo ne peut pas être lue. Revenez à LOTUS et importez une image JPEG ou PNG.';});
+  w.document.close();
+  status.textContent='Dans la nouvelle fenêtre, choisissez Imprimer puis Enregistrer en PDF. Sur iPhone, agrandissez l’aperçu d’impression pour accéder au partage PDF.';
+});
+document.querySelectorAll('.tile').forEach(b=>b.addEventListener('click',()=>{document.getElementById('detailTitre').textContent=b.dataset.title;document.getElementById('detailTexte').textContent=b.dataset.desc;const d=document.getElementById('detail');d.hidden=false;d.focus();}));
+
+// Modules intégrés — fonctionnement local, sans compte ni serveur.
+const showModule=id=>{const panel=document.getElementById(id);panel.hidden=false;panel.scrollIntoView({behavior:'smooth',block:'start'});};
+document.getElementById('openDocuments').addEventListener('click',()=>showModule('documents'));
+document.querySelectorAll('.tile').forEach(b=>{if(b.dataset.title?.includes('LOTUS Musique'))b.addEventListener('click',()=>showModule('musicPanel'));if(b.dataset.title?.includes('LOTUS Zen'))b.addEventListener('click',()=>showModule('zenPanel'));});
+document.getElementById('docType').addEventListener('change',()=>{document.getElementById('docResult').hidden=true;const t=document.getElementById('docType').value;document.getElementById('cvFields').hidden=t!=='cv';document.getElementById('letterFields').hidden=t!=='motivation';document.getElementById('proxyFields').hidden=t!=='procuration';});
+document.getElementById('makeDoc').addEventListener('click',()=>{
+ const type=document.getElementById('docType').value,name=document.getElementById('docName').value.trim(),contact=document.getElementById('docContact').value.trim(),info=document.getElementById('docInfo').value.trim();
+ if(!name){alert('Indiquez votre nom pour commencer.');return;}
+ const header=name+(contact?'\n'+contact:'');
+ let result='';
+ if(type==='cv'){
+ const val=id=>document.getElementById(id).value.trim();
+ const style=val('cvStyle'), job=val('cvJob'), profile=val('cvProfile'), exp=val('cvExperience'), edu=val('cvEducation'), skills=val('cvSkills'), languages=val('cvLanguages');
+ const section=(label,content)=>'\n\n'+label+'\n'+(content||'[À compléter]');
+ result=(style==='moderne'?'✦ ':style==='simple'?'':'CURRICULUM VITAE\n\n')+header+(job?'\n'+job:'')+section('PROFIL',profile)+section('EXPÉRIENCES PROFESSIONNELLES',exp||info)+section('FORMATIONS',edu)+section('COMPÉTENCES',skills)+section('LANGUES',languages);
+ }
+ else if(type==='motivation'){
+ const job=document.getElementById('letterJob').value.trim()||'[poste visé]';
+ const company=document.getElementById('letterCompany').value.trim()||'[entreprise]';
+ const city=document.getElementById('letterCity').value.trim()||'[ville]';
+ result=header+'\n\n'+city+', le '+new Date().toLocaleDateString('fr-BE')+'\n\nÀ l’attention de '+company+'\n\nObjet : Candidature au poste de '+job+'\n\nMadame, Monsieur,\n\nJe vous adresse ma candidature pour le poste de '+job+'.\n\n'+(info||'[Présentez votre expérience, vos qualités et vos motivations personnelles.]')+'\n\nJe serais heureux(se) de pouvoir échanger avec vous lors d’un entretien.\n\nVeuillez agréer, Madame, Monsieur, mes salutations distinguées.\n\n'+name;
+ }else{
+ const proxy=document.getElementById('proxyName').value.trim()||'[nom du mandataire]';
+ const task=document.getElementById('proxyTask').value.trim()||info||'[démarche autorisée]';
+ const start=document.getElementById('proxyStart').value||'[date de début]';
+ const end=document.getElementById('proxyEnd').value||'[date de fin]';
+ if(start[0]!=='['&&end[0]!=='['&&start>end){alert('La date de fin doit être égale ou postérieure à la date de début.');return;}
+ const formatDate=value=>value[0]==='['?value:value.split('-').reverse().join('/');
+ const city=document.getElementById('proxyCity').value.trim()||'[ville]';
+ result='PROCURATION\n\nJe soussigné(e) '+name+(contact?', '+contact:'')+', autorise '+proxy+' à effectuer en mon nom la démarche suivante :\n\n'+task+'\n\nPériode de validité : du '+formatDate(start)+' au '+formatDate(end)+'.\n\nFait à '+city+', le '+new Date().toLocaleDateString('fr-BE')+'.\n\nSignature du mandant : __________________\nSignature du mandataire (si exigée) : __________________';
+ }
+ document.getElementById('docOutput').value=result;document.getElementById('docResult').hidden=false;
+});
+document.getElementById('copyDoc').addEventListener('click',async()=>{const t=document.getElementById('docOutput');try{await navigator.clipboard.writeText(t.value);alert('Texte copié.')}catch{t.select();alert('Sélectionnez Copier dans le menu de votre appareil.')}});
+document.getElementById('saveDoc').addEventListener('click',()=>{const content=document.getElementById('docOutput').value;const a=document.createElement('a');const u=URL.createObjectURL(new Blob([content],{type:'text/plain;charset=utf-8'}));a.href=u;a.download='LOTUS-Document.txt';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);});
+document.getElementById('printDoc').addEventListener('click',()=>{const content=document.getElementById('docOutput').value;const w=window.open('','_blank');if(!w){alert('Autorisez les fenêtres surgissantes pour imprimer.');return;}const pre=w.document.createElement('pre');pre.style.cssText='font:16px/1.5 Arial,sans-serif;white-space:pre-wrap;overflow-wrap:anywhere;margin:25mm';pre.textContent=content;w.document.body.append(pre);w.document.title='LOTUS Documents';w.focus();w.print();});
+try{document.getElementById('playlist').value=localStorage.getItem('lotus_playlist')||'';}catch{}
+document.getElementById('savePlaylist').addEventListener('click',()=>{try{localStorage.setItem('lotus_playlist',document.getElementById('playlist').value);document.getElementById('musicStatus').textContent='Playlist enregistrée sur cet appareil.';}catch{document.getElementById('musicStatus').textContent='Enregistrement indisponible dans ce navigateur.';}});
+document.getElementById('zenButton').addEventListener('click',()=>{document.getElementById('zenMessage').textContent='🌿 Inspirez 4 secondes… puis expirez 6 secondes. Prenez votre temps.';});
+</script>
+</body></html>

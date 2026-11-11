@@ -1,0 +1,21 @@
+{
+  "name": "LOTUS IA",
+  "short_name": "LOTUS IA",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "theme_color": "#fff8e8",
+  "background_color": "#fff8e8",
+  "icons": [
+    {
+      "src": "lotus-ia-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "lotus-ia-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
