@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fff8eb"><title>LUMÉA IA — Votre univers</title>
+<style>
+:root{--or:#a77a30;--fonce:#5f492a;--creme:#fff8eb;--bord:#ddc391}*{box-sizing:border-box}body{margin:0;background:var(--creme);color:var(--fonce);font:16px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}header{text-align:center;padding:35px 16px 22px;background:linear-gradient(135deg,#fffdf6,#f6e7c4)}h1{color:var(--or);font-size:2.1rem;margin:0}h2{color:var(--or);margin:0 0 10px;font-size:1.35rem}main{max-width:780px;margin:auto;padding:15px}.carte{background:#fffdf7;border:1px solid var(--bord);border-radius:20px;padding:20px;margin:17px 0;box-shadow:0 3px 14px #9a7c3715}button,.bouton{display:inline-block;background:var(--or);color:#fff;border:0;border-radius:12px;padding:12px 15px;margin:5px 4px 5px 0;font:inherit;font-weight:600;cursor:pointer;text-decoration:none}button.secondaire{background:#806a45}input,select,textarea{display:block;width:100%;padding:13px;margin:7px 0 13px;border:1px solid var(--bord);border-radius:12px;font:inherit;background:#fff;color:#43341d}label{font-weight:600}#conversation{min-height:110px;max-height:360px;overflow:auto;padding:12px;background:#fff9ee;border-radius:12px;border:1px solid #eee0c5;margin-bottom:12px}.message{padding:9px 12px;border-radius:12px;margin:8px 0;background:#f7ecd5}.message.user{background:#eee4cc}small,.info{color:#786447}#photoCanvas{max-width:100%;height:auto;border-radius:12px}footer{text-align:center;padding:28px;font-size:13px;color:#806a45}.actions{display:flex;flex-wrap:wrap;gap:3px}.statut{min-height:1.4em;color:#735b32}a{color:#88601e}#musiqueResultat{display:none} @media(prefers-reduced-motion:no-preference){button:active{transform:scale(.98)}}
+</style>
+</head>
+<body>
+<header><h1>✨ LUMÉA IA</h1><p>Votre univers doux et intuitif 💛</p></header>
+<main>
+<section class="carte" id="services-proximite"><h2>📍 Services à proximité</h2><p>Recherchez les services autour de vous ou dans une ville.</p><div class="actions"><button onclick="chercherService('pharmacie de garde')">💊 Pharmacie de garde</button><button onclick="chercherService('médecin de garde')">🩺 Médecin de garde</button><button onclick="chercherService('hôpital urgences')">🏥 Hôpitaux</button><button onclick="chercherService('supermarché')">🛒 Supermarchés</button><button onclick="chercherService('boulangerie')">🥖 Boulangeries</button><button onclick="chercherService('restaurant')">🍽️ Restaurants</button><button onclick="chercherService('distributeur billets')">🏧 Distributeurs</button><button onclick="chercherService('commissariat police')">🚓 Police</button></div><p id="serviceStatut" class="statut" role="status"></p><small>Les horaires de garde et les urgences doivent être vérifiés auprès des services officiels.</small></section>
+<section class="carte" id="discussion"><h2>💬 Discuter avec LUMÉA</h2><div id="conversation" aria-live="polite"><div class="message">LUMÉA 💛 : Bonjour ! Je suis LUMÉA. Comment puis-je vous aider ?</div></div><label for="message">Votre message</label><input id="message" type="text" placeholder="Écrivez ou dictez votre message…" autocomplete="off"><div class="actions"><button onclick="envoyer()">Envoyer ✨</button><button onclick="parlerAvecLumea()">🎙️ Parler à LUMÉA</button><button onclick="ecouterLumea()" class="secondaire">🔊 Écouter LUMÉA</button><button onclick="arreterVoix()" class="secondaire">⏹️ Arrêter la voix</button></div><p id="statutVoix" class="statut" role="status"></p><p><small>Si le micro du bouton ne transcrit rien sur iPhone, touchez le champ « Votre message » et utilisez le microphone du clavier iOS, puis « Envoyer ».</small></p><p class="info"><small>Sur iPhone, si la reconnaissance vocale du navigateur n'est pas disponible, touchez le champ de message puis le 🎙️ du clavier iOS pour dicter. Le micro du clavier fonctionne indépendamment du bouton ci-dessus.</small></p><label for="choixVoix">Voix de lecture</label><select id="choixVoix"><option value="">Voix douce et chaleureuse (automatique)</option></select></section>
+<section class="carte" id="musique"><h2>🎵 Reconnaissance musicale</h2><p>Écouter un extrait musical et préparer son identification.</p><button onclick="lumeaEcouter()">🎤 Tester le micro musical (8 secondes)</button><button onclick="ouvrirShazam()" class="secondaire">🎵 Identifier avec Shazam</button><p id="musiqueStatut" class="statut" role="status"></p><audio id="apercuMusique" controls style="display:none;width:100%;margin:8px 0"></audio><p class="info"><small>Le microphone peut enregistrer un extrait, mais l'identification automatique du titre et de l'artiste nécessite un service de reconnaissance musicale externe, qui n'est pas encore connecté.</small></p><label for="rechercheChanson">Vous connaissez quelques mots ou le nom de l'artiste ?</label><input id="rechercheChanson" placeholder="Paroles, titre ou artiste"><div class="actions"><button onclick="chercherChanson('recherche')">🔎 Rechercher la chanson</button><button onclick="chercherChanson('clip')" class="secondaire">🎬 Chercher le clip</button><button onclick="chercherChanson('apple')" class="secondaire">🍎 Apple Music</button></div></section>
+<section class="carte" id="voyages"><h2>🌍 Voyages & Découvertes</h2><p>City trips et séjours dans le monde entier.</p><label for="destinationVoyage">Pays ou ville</label><input id="destinationVoyage" placeholder="Paris, Tokyo, New York…"><label for="typeVoyage">Que souhaitez-vous découvrir ?</label><select id="typeVoyage"><option value="city trip">🏙️ City trip</option><option value="séjour vacances">🏖️ Voyage classique</option><option value="budget voyage prix sur place">💶 Budget sur place</option><option value="excursions visites">🗺️ Excursions</option><option value="restaurants">🍽️ Restaurants sur place</option><option value="hôtels">🏨 Hôtels</option><option value="vols billets avion">✈️ Vols</option></select><button onclick="rechercherVoyageLumea()">✨ Explorer ma destination</button><p id="resultatVoyage" class="statut"></p></section>
+<section class="carte" id="carte-mondiale"><h2>🗺️ Carte mondiale</h2><label for="mapPays">Pays</label><input id="mapPays" placeholder="Belgique"><label for="mapVille">Ville</label><input id="mapVille" placeholder="Bruxelles"><label for="mapService">Service</label><select id="mapService"><option value="pharmacie de garde">💊 Pharmacie</option><option value="médecin de garde">🩺 Médecin</option><option value="hôpital">🏥 Hôpital</option><option value="restaurant">🍽️ Restaurant</option><option value="supermarché">🛒 Magasin</option><option value="police">🚓 Police</option><option value="attractions touristiques">🏛️ Attractions</option></select><div class="actions"><button onclick="lumeaCarteRecherche()">🔎 Rechercher sur la carte</button><button onclick="lumeaCarteGPS()" class="secondaire">📍 Autour de moi</button></div><p id="mapStatut" class="statut"></p><small>Les résultats s'ouvrent dans Google Maps, pour éviter les problèmes de cartes intégrées sur Safari.</small></section>
+<section class="carte" id="photos"><h2>📷 Retoucher une photo</h2><label for="photo">Choisir une photo</label><input type="file" id="photo" accept="image/*"><canvas id="photoCanvas" aria-label="Aperçu de la photo"></canvas><label for="luminosite">☀️ Luminosité</label><input type="range" id="luminosite" min="50" max="150" value="100"><label for="contrastePhoto">🎨 Contraste</label><input type="range" id="contrastePhoto" min="50" max="150" value="100"><button onclick="telechargerPhoto()">💾 Enregistrer la photo</button><p id="photoStatut" class="statut"></p></section>
+<section class="carte"><h2>♿ Accessibilité</h2><label for="accessibilite">Affichage</label><select id="accessibilite"><option value="normal">Normal</option><option value="grand">🔠 Texte agrandi</option><option value="contraste">◐ Contraste renforcé</option></select></section>
+</main><footer>© 2026 LUMÉA IA — Tous droits réservés.</footer>
+<script>
+'use strict';
+const el=id=>document.getElementById(id);
+const ouvrirRecherche=texte=>window.open('https://www.google.com/search?q='+encodeURIComponent(texte),'_blank','noopener,noreferrer');
+function ajouterMessage(texte,estUtilisateur=false){const div=document.createElement('div');div.className='message'+(estUtilisateur?' user':'');div.textContent=(estUtilisateur?'Vous : ':'LUMÉA 💛 : ')+texte;el('conversation').appendChild(div);el('conversation').scrollTop=el('conversation').scrollHeight;}
+function envoyer(){const champ=el('message');const texte=champ.value.trim();if(!texte)return;ajouterMessage(texte,true);champ.value='';const t=texte.toLowerCase();let reponse=/bonjour|salut|coucou/.test(t)?'Bonjour ! 💛 Comment allez-vous ?':/comment vas|ça va|ca va/.test(t)?'Je vais bien, merci ! 💛':/ton nom|tu t.appelles/.test(t)?'Je m’appelle LUMÉA IA. ✨':/merci/.test(t)?'Avec plaisir ! 💛':/voyage|city trip|vacances/.test(t)?'Découvrez la rubrique Voyages pour rechercher des destinations dans le monde entier. 🌍':/musique|chanson/.test(t)?'La rubrique Musique permet de rechercher un titre. La reconnaissance automatique n’est pas encore connectée. 🎵':/pharmacie|médecin|hôpital|restaurant/.test(t)?'Vous pouvez chercher ce service dans la rubrique Services à proximité. 📍':'Je suis LUMÉA 💛. Pour le moment, je réponds à certaines questions courantes. Pouvez-vous préciser votre demande ?';ajouterMessage(reponse);dernierTexteLumea=reponse;}
+el('message').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();envoyer();}});
+let reconnaissanceActive=null;
+let dernierTexteLumea='Bonjour ! Je suis LUMÉA. Comment puis-je vous aider ?';
+function parlerAvecLumea(){
+ const statut=el('statutVoix'),champ=el('message');
+ if(!window.isSecureContext){statut.textContent='⚠️ Ouvrez LUMÉA en HTTPS dans Safari pour autoriser le micro.';return;}
+ const API=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!API){statut.textContent='⚠️ Safari ne propose pas cette reconnaissance vocale ici. Touchez le champ de message et utilisez le 🎙️ du clavier iPhone.';champ.focus();return;}
+ try{
+  if(reconnaissanceActive){reconnaissanceActive.abort();reconnaissanceActive=null;}
+  const rec=new API();reconnaissanceActive=rec;rec.lang='fr-FR';rec.continuous=false;rec.interimResults=true;rec.maxAlternatives=1;
+  let texteReconnu='';let aEuErreur=false;
+  rec.onstart=()=>{statut.textContent='🎙️ Micro activé : parlez clairement. Attendez la transcription…';};
+  rec.onresult=e=>{texteReconnu=Array.from(e.results).map(r=>r[0].transcript).join(' ').trim();if(texteReconnu){champ.value=texteReconnu;statut.textContent='📝 Paroles reconnues : '+texteReconnu+' — appuyez sur Envoyer ✨';}};
+  rec.onerror=e=>{aEuErreur=true;statut.textContent='⚠️ Reconnaissance vocale : '+e.error+'. Utilisez le microphone du clavier iPhone pour dicter.';};
+  rec.onend=()=>{if(!texteReconnu&&!aEuErreur)statut.textContent='⚠️ Le micro s’est ouvert, mais Safari n’a fourni aucun texte. Touchez le champ de message, puis le 🎙️ du clavier iPhone.';if(reconnaissanceActive===rec)reconnaissanceActive=null;};
+  rec.start();
+ }catch(e){statut.textContent='⚠️ Reconnaissance vocale impossible : '+e.message+'. Essayez le microphone du clavier iPhone.';champ.focus();}
+}
+function chargerVoix(){
+ if(!('speechSynthesis' in window))return;
+ const menu=el('choixVoix'),valeur=menu.value,voix=window.speechSynthesis.getVoices();
+ menu.replaceChildren(new Option('Voix française douce (automatique)',''));
+ voix.forEach((v,i)=>{if(v.lang.toLowerCase().startsWith('fr'))menu.add(new Option(v.name+' ('+v.lang+')',String(i)));});
+ if([...menu.options].some(o=>o.value===valeur))menu.value=valeur;
+}
+function arreterVoix(){if('speechSynthesis' in window)window.speechSynthesis.cancel();el('statutVoix').textContent='⏹️ Lecture arrêtée.';}
+function ecouterLumea(){
+ const statut=el('statutVoix');
+ if(!('speechSynthesis' in window)){statut.textContent='⚠️ La synthèse vocale n’est pas disponible dans ce navigateur.';return;}
+ const messages=[...el('conversation').querySelectorAll('.message:not(.user)')];
+ const dernier=messages[messages.length-1];
+ const texte=dernier?dernier.textContent.replace(/^LUMÉA 💛 : /,'').trim():dernierTexteLumea;
+ if(!texte){statut.textContent='Aucune réponse à lire.';return;}
+ const synth=window.speechSynthesis;
+ synth.cancel();synth.resume();
+ const u=new SpeechSynthesisUtterance(texte);u.lang='fr-FR';u.rate=.9;u.pitch=1.05;u.volume=1;
+ const voix=synth.getVoices(),choix=el('choixVoix').value;
+ const francaises=voix.filter(v=>v.lang.toLowerCase().startsWith('fr'));
+ const douce=francaises.find(v=>/amelie|amélie|audrey|marie|julie|celine|céline|hortense|virginie|siri.*female/i.test(v.name))||francaises[0];
+ if(choix!==''&&voix[Number(choix)])u.voice=voix[Number(choix)];else if(douce)u.voice=douce;
+ u.onstart=()=>{statut.textContent='🔊 LUMÉA parle… Vérifiez le volume de votre appareil.';};
+ u.onend=()=>{statut.textContent='✅ Lecture terminée.';};
+ u.onerror=e=>{statut.textContent='⚠️ Lecture vocale impossible ('+e.error+'). Vérifiez le son, ouvrez la page dans Safari et réessayez.';};
+ statut.textContent='🔊 Démarrage de la voix…';
+ synth.speak(u);
+}
+if('speechSynthesis' in window){chargerVoix();if(speechSynthesis.addEventListener)speechSynthesis.addEventListener('voiceschanged',chargerVoix);}
+let urlDernierExtrait=null;
+async function lumeaEcouter(){
+ const statut=el('musiqueStatut'),lecteur=el('apercuMusique');
+ if(!navigator.mediaDevices?.getUserMedia||!window.MediaRecorder){statut.textContent='⚠️ Enregistrement non pris en charge dans ce navigateur. Essayez Safari.';return;}
+ let flux;
+ try{
+  statut.textContent='🎤 Autorisation du microphone…';
+  flux=await navigator.mediaDevices.getUserMedia({audio:true});
+  const rec=new MediaRecorder(flux),morceaux=[];
+  rec.ondataavailable=e=>{if(e.data.size)morceaux.push(e.data);};
+  rec.onerror=()=>{statut.textContent='⚠️ Erreur pendant l’enregistrement.';flux.getTracks().forEach(t=>t.stop());};
+  rec.onstop=()=>{
+   flux.getTracks().forEach(t=>t.stop());
+   if(urlDernierExtrait)URL.revokeObjectURL(urlDernierExtrait);
+   const blob=new Blob(morceaux,{type:rec.mimeType||'audio/mp4'});
+   if(!blob.size){statut.textContent='⚠️ Aucun son enregistré. Vérifiez le microphone.';return;}
+   urlDernierExtrait=URL.createObjectURL(blob);lecteur.src=urlDernierExtrait;lecteur.style.display='block';
+   statut.textContent='✅ Extrait enregistré : écoutez-le ci-dessous pour tester le micro. L’identification automatique n’est pas encore connectée.';
+  };
+  rec.start();statut.textContent='🎶 Enregistrement en cours pendant 8 secondes…';
+  setTimeout(()=>{if(rec.state==='recording')rec.stop();},8000);
+ }catch(e){if(flux)flux.getTracks().forEach(t=>t.stop());statut.textContent='⚠️ Microphone inaccessible : '+e.message;}
+}
+function ouvrirShazam(){el('musiqueStatut').textContent='Ouverture de Shazam pour identifier la chanson. Cette identification se fait dans Shazam, pas encore directement dans LUMÉA.';window.open('https://www.shazam.com/','_blank','noopener,noreferrer');}
+function chercherChanson(mode){const q=el('rechercheChanson').value.trim();if(!q){el('musiqueStatut').textContent='Indiquez un titre, un artiste ou quelques paroles pour lancer la recherche.';return;}const texte=mode==='clip'?'clip officiel '+q:mode==='apple'?'site:music.apple.com '+q:'chanson titre artiste paroles '+q;ouvrirRecherche(texte);}
+function chercherService(type){const statut=el('serviceStatut');if(!navigator.geolocation){statut.textContent='Position indisponible. Utilisez la carte mondiale et indiquez une ville.';return;}statut.textContent='📍 Demande de localisation…';navigator.geolocation.getCurrentPosition(p=>{statut.textContent='Ouverture des résultats Google Maps…';window.open('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(type+' près de '+p.coords.latitude+','+p.coords.longitude),'_blank','noopener,noreferrer');},()=>{statut.textContent='Localisation indisponible. Vous pouvez rechercher avec une ville dans la carte mondiale.';},{timeout:12000,enableHighAccuracy:false});}
+function rechercherVoyageLumea(){const d=el('destinationVoyage').value.trim();if(!d){el('resultatVoyage').textContent='Indiquez une destination.';return;}el('resultatVoyage').textContent='Ouverture de résultats externes : vérifiez les tarifs et disponibilités.';ouvrirRecherche(el('typeVoyage').value+' '+d+' prix conseils');}
+function lumeaCarteRecherche(){const ville=el('mapVille').value.trim(),pays=el('mapPays').value.trim();if(!ville&&!pays){el('mapStatut').textContent='Indiquez une ville ou un pays.';return;}el('mapStatut').textContent='Ouverture de Google Maps…';window.open('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent([el('mapService').value,ville,pays].filter(Boolean).join(' ')),'_blank','noopener,noreferrer');}
+function lumeaCarteGPS(){chercherService(el('mapService').value);}
+let imageOriginale=null;const canvas=el('photoCanvas');const contexte=canvas.getContext('2d');el('photo').addEventListener('change',function(){const fichier=this.files?.[0];if(!fichier)return;const url=URL.createObjectURL(fichier);const img=new Image();img.onload=()=>{imageOriginale=img;const facteur=Math.min(1,1600/Math.max(img.width,img.height));canvas.width=Math.round(img.width*facteur);canvas.height=Math.round(img.height*facteur);el('luminosite').value=100;el('contrastePhoto').value=100;afficherPhoto();URL.revokeObjectURL(url);el('photoStatut').textContent='Photo chargée.';};img.onerror=()=>{el('photoStatut').textContent='Impossible de lire cette photo.';URL.revokeObjectURL(url);};img.src=url;});function afficherPhoto(){if(!imageOriginale)return;contexte.filter='brightness('+el('luminosite').value+'%) contrast('+el('contrastePhoto').value+'%)';contexte.clearRect(0,0,canvas.width,canvas.height);contexte.drawImage(imageOriginale,0,0,canvas.width,canvas.height);contexte.filter='none';}el('luminosite').addEventListener('input',afficherPhoto);el('contrastePhoto').addEventListener('input',afficherPhoto);function telechargerPhoto(){if(!imageOriginale){el('photoStatut').textContent='Choisissez d’abord une photo.';return;}const a=document.createElement('a');a.download='photo-lumea.png';a.href=canvas.toDataURL('image/png');a.click();}
+el('accessibilite').addEventListener('change',e=>{document.body.style.fontSize=e.target.value==='grand'?'21px':'';document.body.style.background=e.target.value==='contraste'?'#fff':'#fff8eb';document.body.style.color=e.target.value==='contraste'?'#111':'#5f492a';});
+</script>
+</body></html>
